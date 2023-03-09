@@ -1,0 +1,397 @@
+openapi: 3.0.1
+info:
+  title: hdfcBackEnd-Protal-to-SalesForce-API
+  description: Hdfc developer portal SF -api
+  version: 1.0.0
+servers:
+  - url: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Builder
+    description: Simple example endpoints
+  - name: Project
+    description: Simple example endpoints
+  
+
+paths:
+  /refreshToken:
+    post:
+      tags:
+        - RefreshToken
+      description: Generate access Token using refresh token
+      parameters:
+        - in: header
+          name: x-access-token
+          required: false
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/refreshToken"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateBuilderDetails:
+    post:
+      tags:
+        - Builder
+      description: create and update company Info for project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateBuilderStatus"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateBuilderDuplicate:
+    post:
+      tags:
+        - Builder
+      description: create and update company Info for project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateBuilderDuplicate"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateProjectStatus:
+    post:
+      tags:
+        - Project
+      description: API to update the status of the project by project ID
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateProjectStatus"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /createBuilder:
+    post:
+      tags:
+        - Builder
+      description: create and update company Info for profile
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createBuilder"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"    
+  # /spec:
+  #   get:
+  #     tags:
+  #       - Specification
+  #     responses:
+  #       200:
+  #         description: Return the API specification
+  #         content: {}
+components:
+  schemas:
+    Example:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: example 3
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+    ExampleBody:
+      title: example
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: token
+    refreshToken:
+      title: Generate Refersh Token
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          example: ""
+    updateBuilderStatus:
+      title: api to update builder status by id
+      type: object
+      properties:
+        builderId:
+          type: integer
+          example: 1
+        status:
+          type: string
+          example: ""
+        reason:
+          type: string
+          example: ""
+        builder_number:
+          type: string
+          example: ""
+    updateBuilderDuplicate:
+      title: api to mark a builder as duplicate
+      type: object
+      properties:
+        builderId:
+          type: integer
+          example: 1
+        reason:
+          type: string
+          example: ""
+    updateProjectStatus:
+      title: API to update the status of the project by project ID
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 1
+        status:
+          type: string
+          example: ""
+    createBuilder:
+      title: company info operations
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Company 12345"
+        entity_id:
+          type: integer
+          example: 1
+        pan_number:
+          type: string
+          example: "3h23hhj23j"
+        cin_number:
+          type: string
+          nullable: true
+          example: "43453533434343"
+        address_line_1:
+          type: string
+          example: "2nd Floor, Round 345"
+        address_line_2:
+          type: string
+          example: "Chennai"
+        address_line_3:
+          type: string
+          example: "Tamilnadu, India"
+        pincode_id:
+          type: integer
+          example: 1
+        city_id:
+          type: integer
+          example: 1
+        state_id:
+          type: integer
+          example: 1
+        district_id:
+          type: integer
+          example: 1
+        group_company_name:
+          type: string
+          example: "Asset Group of companies"
+        completed_project_count:
+          type: integer
+          example: 20
+        completed_project_names:
+          type: string
+          example: "Dream Homes, Forest View"
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              file_name:
+                type: string
+                example: "Pancard 1"
+              file_url:
+                type: string
+                example: "www.awss3.com/ewe/ewewew/"
+              document_type:
+                type: string
+                example: "panCard"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+   

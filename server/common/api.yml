@@ -1,0 +1,5486 @@
+openapi: 3.0.1
+info:
+  title: hdfcBackEnd
+  description: Hdfc developer portal api
+  version: 1.0.0
+servers:
+  - url: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+  - name: RefreshToken
+    description: Refresh token for creating new access token
+  - name: User Registration and Otp
+    description: User registration and Otp verification
+  - name: User Login , Otp and Company
+    description: User login , Otp verification and Company deails update
+  - name: Forgot and Reset password
+    description: User forgotten and Reset password
+  - name: User details
+    description: User details
+  - name: Project Creation
+    description: Create and Update rera,project info, Company details and construction finance
+  - name: Project Summary
+    description: featch all Project,Document,company and Address by project id
+  - name: Get Company Details
+    description: Get Company Details for selection by passing parameter
+  - name: Get Master data
+    description: Get state,districts,city,area,taluka and pincode etc
+  - name: User Management
+    description: Manage users by admins
+  - name: User Project
+    description: get all user details
+  - name: Work Progress
+    description: Work Progress apis
+  - name: SalesForce
+    description: Simple example endpoints
+  - name: Project Builder
+    description: Project Builder apis
+  - name: Project Purchaser
+    description: Project Purchaser apis
+  - name: file upload
+    description: Project purchase file upload
+  - name: Dashboard APIs
+    description: APIs for dashboard
+  - name: add purchaser-Bulk
+    description: Project purchase details
+paths:
+  /refreshToken:
+    post:
+      tags:
+        - RefreshToken
+      description: Generate access Token using refresh token
+      parameters:
+        - in: header
+          name: x-access-token
+          required: false
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/refreshToken"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /{id}:
+    get:
+      tags:
+        - Examples
+      parameters:
+        - name: id
+          in: path
+          description: The id of the example to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getUser/{id}:
+    get:
+      tags:
+        - User details
+      parameters:
+        - name: id
+          in: path
+          description: The id of the user to retrieve
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the user with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /userRegistration:
+    post:
+      tags:
+        - User Registration and Otp
+      description: user Registration
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userRegistration"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /regOtpVerifications:
+    post:
+      tags:
+        - User Registration and Otp
+      parameters:
+        - in: header
+          name: otp-access-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: reg Otp Verifications
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/regOtpVerifications"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /resendRegOtp:
+    post:
+      tags:
+        - User Registration and Otp
+      parameters:
+        - in: header
+          name: otp-access-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: resend Otp
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/resendRegOtp"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /resendLoginOtp:
+    post:
+      tags:
+        - User Login , Otp and Company
+      parameters:
+        - in: header
+          name: otp-access-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: resend Otp
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/resendLoginOtp"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /loginOtpVerifications:
+    post:
+      tags:
+        - User Login , Otp and Company
+      parameters:
+        - in: header
+          name: otp-access-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: login Otp Verifications
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/loginOtpVerifications"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /userLogin:
+    post:
+      tags:
+        - User Login , Otp and Company
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: user login
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userLogin"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /forgotPassword:
+    post:
+      tags:
+        - Forgot and Reset password
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: forgot password request
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/forgotPassword"
+        required: true
+      responses:
+        201:
+          description: Return the token for testimg currently. On production it will send am email link with token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /resetPassword:
+    post:
+      tags:
+        - Forgot and Reset password
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      description: reset password request
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/resetPassword"
+        required: true
+      responses:
+        201:
+          description: Return the token for testimg currently. On production it will send am email link with token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllCompanies:
+    get:
+      tags:
+        - Get Company Details
+      parameters:
+        - name: key
+          in: query
+          description: The search key to match with name of companies.
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of companies with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompanyDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllDesignations:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: The search type to match with type of designations.
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of designations with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DesignationDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /updateProfile:
+    put:
+      tags:
+        - User details
+      parameters:
+        - in: header
+          name: otp-access-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userUpdate"
+      description: Update user details such as email and phone
+      responses:
+        200:
+          description: Update user details such as email and phone
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userRegistration"
+
+  /getAllEntities:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of entities with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntityDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllStates:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of states with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StateDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllDistricts:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: The search key to match with state id.
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of districts with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DistrictDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllCities:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: district
+          in: query
+          description: The search key to match with district id.
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of cities with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CityDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllPincodes:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: The search key to match with state id.
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: The search key to match with city id.
+          required: false
+          schema:
+            type: string    
+      responses:
+        200:
+          description: Return the list of cities with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PincodeDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllBankAccountTypes:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of bank account types
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankAccountTypeDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllBanks:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of banks
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BankDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /rera:
+    post:
+      tags:
+        - Project Creation
+      description: create and update rera deatails
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/reraOperations"
+              type: array
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /projectInfo:
+    post:
+      tags:
+        - Project Creation
+      description: create and update project Info
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/projectInfo"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /companyDetails:
+    post:
+      tags:
+        - User Login , Otp and Company
+      description: create and update company Info for profile
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/companyInfoUpdate"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /createCompanyProject:
+    post:
+      tags:
+        - Project Creation
+      description: create and update company Info for project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/companyProjectInfoUpdate"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /companyDetails/{company}:
+    get:
+      tags:
+        - Get Company Details
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the company with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/companyInfoUpdate"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllProjectCategory:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of project category with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProjectCategory"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllDocument:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of document with id and type
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllDocument"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllProjects:
+    post:
+      tags:
+        - Project Summary
+      description: get all project info by project id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetAllProjects"
+              type: object
+        required: true
+      responses:
+        200:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllProjects"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllCompanyProjects/{company}:
+    get:
+      tags:
+        - Project Creation
+      description: get all project info by company id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllProjects"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getCompanyProjectsForSelection/{company}:
+    get:
+      tags:
+        - Project Creation
+      description: get all project info by company id for selection
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllProjects"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /SaveandUpdateAddressinfo:
+    post:
+      tags:
+        - Project Creation
+      description: create and update project address Info
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveandUpdateAddressinfo"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllProjectAddress/{project}:
+    get:
+      tags:
+        - Project Summary
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get All project addresses Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /documentSingleOperations:
+    post:
+      tags:
+        - Project Creation
+      description: create and update project doc Info
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentSingleOperations"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /documentBulkOperations:
+    post:
+      tags:
+        - Project Creation
+      description: create and update project bulk doc Info
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DocumentBulkOperations"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllProjectDocuments/{project}:
+    get:
+      tags:
+        - Project Summary
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get All project documents Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllCitiesbyState:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: The search key to match with state id.
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of cities with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CityDetailsbyState"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllAreabyState:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: The search key to match with state id.
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: The search key to match with city id.
+          required: false
+          schema:
+            type: string    
+      responses:
+        200:
+          description: Return the list of area with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AreaDetailsbyState"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllTalukabyState:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: The search key to match with state id.
+          required: false
+          schema:
+            type: string
+        - name: district
+          in: query
+          description: The search key to match with district id.
+          required: false
+          schema:
+            type: string    
+      responses:
+        200:
+          description: Return the list of Taluka with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TalukaDetailsbyState"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getCompanyInfoByProject:
+    post:
+      tags:
+        - Project Summary
+      description: get all company info by project id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetCompanyInfoByProject"
+              type: array
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /memberDetails:
+    post:
+      tags:
+        - User Login , Otp and Company
+      description: create and update memmber Info for profile
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/memberInfoUpdate"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllUserCompanies:
+    get:
+      tags:
+        - User Login , Otp and Company
+      description: get all company info by login user id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /completeCompanyDetails/{company}:
+    get:
+      tags:
+        - Get Company Details
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the company with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/companyInfoUpdate"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllUserCompanyList:
+    get:
+      tags:
+        - User Login , Otp and Company
+      description: get all company List by login user id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /deteleDocumentByid:
+    post:
+      tags:
+        - Project Creation
+      description: delete document by document id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeteleDocumentByid"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /deteleDocumentByDocType:
+    post:
+      tags:
+        - Project Creation
+      description: delete document by document type id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeteleDocumentByDocType"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /submitProject:
+    post:
+      tags:
+        - Project Creation
+      description: Submit project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitProject"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getDashboardAnalytics:
+    get:
+      tags:
+        - Dashboard APIs
+      description: Get Dashboard Analytics
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getDashboardProjectAnalytics:
+    get:
+      tags:
+        - Dashboard APIs
+      description: Get Dashboard Project Analytics
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+
+  /getDashboardNotifications:
+    get:
+      tags:
+        - Dashboard APIs
+      description: Get Dashboard Notifications
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+
+  /getDashboardQueries:
+    get:
+      tags:
+        - Dashboard APIs
+      description: Get Dashboard Notifications
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"  
+
+  /getDashboardLoanAnalytics:
+    get:
+      tags:
+        - Dashboard APIs
+      description: get Dashboard Loan Analytics
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"                                                               
+
+
+  /createUser:
+    post:
+      tags:
+        - User Management
+      description: user Creation
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userCreation"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /assignUserCompany/{user}:
+    put:
+      tags:
+        - User Management
+      description: user detaisl updation with company and project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: path
+          description: The id of the user to retrieve
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userCompanyUpdation"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getCreatedUsers:
+    get:
+      tags:
+        - User Management
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: role
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: city
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: project
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+        - in: query
+          name: sortField
+          required: false
+          schema:
+            type: string
+          example: "username/projectsCount/city"
+        - in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+          example: "asc/desc"
+        - in: query
+          name: offsetKey
+          description: offset
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the user with the specified id
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getUserDetails/{user}:
+    get:
+      tags:
+        - User Management
+      parameters:
+        - name: user
+          in: path
+          description: The id of the user to retrieve
+          required: true
+          schema:
+            type: integer
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the user with the specified id
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /updateUser/{user}:
+    put:
+      tags:
+        - User Management
+      description: user Updation
+      parameters:
+        - in: path
+          name: user
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/userUpdation"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /makeUserAdmin/{user}:
+    put:
+      tags:
+        - User Management
+      description: user Updation to make super admin
+      parameters:
+        - in: path
+          name: user
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllProjectByUser:
+    get:
+      tags:
+        - Project Creation
+      description: Get all project by user
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: key
+          description: company name
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+        - in: query
+          name: offsetKey
+          description: offset
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+            example: "0"
+        - in: query
+          name: limitKey
+          description: list of limit
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+            example: "12"
+        - in: query
+          name: orderKey
+          description: order by project id
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+            example: "desc"
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllProjectByUserForSelect:
+    get:
+      tags:
+        - Project Creation
+      description: Get all project by user
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getAllAccessLevel:
+    get:
+      tags:
+        - Get Master data
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of roles with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StateDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getCompanyByAdminuser:
+    get:
+      tags:
+        - Get Company Details
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: nameSearchKey
+          description: The search key to match with name of companies.
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+            nullable: true
+        - in: query
+          name: orderByKey
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: offsetKey
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: limitKey
+          required: false
+          schema:
+            type: string
+            example: "10"
+      responses:
+        200:
+          description: Return the list of company
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StateDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getProjectByGroupCompany:
+    get:
+      tags:
+        - Get Company Details
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: companyId
+          description: The search key to match with name of companies.
+          required: true
+          allowReserved: true
+          schema:
+            type: string
+            nullable: true
+      responses:
+        200:
+          description: Return the list of company
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StateDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getQueriesByProject/{project}:
+    get:
+      tags:
+        - Query Management
+      description: List all queries raised by HDFC for a project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get All query for a project Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getQueriesByCompany/{company}:
+    get:
+      tags:
+        - Query Management
+      description: List all queries raised by HDFC for project under a company
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get All query for a project from a company
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getQueriesDetailsById/{query}:
+    get:
+      tags:
+        - Query Management
+      description: Get details of the query by query id and list all its communication threads
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Get details of the query by query id and list all its communication threads
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getProjectsforCompany/{company}:
+    get:
+      tags:
+        - Project Creation
+      description: get all project info by company id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: offsetKey
+          description: offset
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+            example: "0"
+        - in: query
+          name: limitKey
+          description: list of limit
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+            example: "10"
+        - in: query
+          name: orderByKey
+          required: false
+          schema:
+            type: string
+            example: "asc"
+      responses:
+        200:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAllProjects"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /addQueryCommunication/{query}:
+    post:
+      tags:
+        - Query Management
+      description: Query communication creation
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: query
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/queryCommunication"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return query communication with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /submitNewDate/{query}:
+    post:
+      tags:
+        - Query Management
+      description: Add query submittion date
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: query
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/submitNewDate"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return query communication with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+  /getNocList/{project}/{type}:
+    get:
+      tags:
+        - Construction Finance
+      description: List all NOC request for the purchaser for a project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: type
+          description: type can be TOWER or BUNGALOW.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List all NOC request for the purchaser for a project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getNocDetailsForPurchaser/{project}/{purchaser}:
+    get:
+      tags:
+        - Construction Finance
+      description: Details of NOC request for the purchaser for a project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: purchaser
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Details of NOC request for the purchaser for a project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAccountListByBuilder/{company}:
+    get:
+      tags:
+        - Construction Finance
+      description: List all accounts of the companies
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: search
+          description: "Building name"
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sortField
+          required: false
+          schema:
+            type: string
+          example: "building_name/total_floor/estimated_date"
+        - in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+          example: "asc/desc"
+        - in: query
+          name: offsetKey
+          description: offset
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List all accounts of the companies
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAllTowers/{project}:
+    get:
+      tags:
+        - Work Progress
+      description: List all towers under a project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: search
+          description: "Building name"
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: buildingType
+          description: "Building Type"
+          required: false
+          schema:
+            type: string
+          example: "tower/bungalow"
+        - in: query
+          name: sortField
+          required: false
+          schema:
+            type: string
+          example: "building_name/total_floor/estimated_date"
+        - in: query
+          name: sortOrder
+          required: false
+          schema:
+            type: string
+          example: "asc/desc"
+        - in: query
+          name: offsetKey
+          description: offset
+          required: false
+          allowReserved: true
+          schema:
+            type: string
+        - in: query
+          name: sortOrderType
+          description: "Sort Order Type"
+          required: false
+          schema:
+            type: string
+            enum: ["LastWeek", "LastMonth", "Last3month", HightToLow, LowToHigh]
+            description: "Select sort value from list."
+      responses:
+        200:
+          description: List all buildings by project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getProgressHistory:
+    get:
+      tags:
+        - Work Progress
+      description: List work progress of by tower id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: buildings
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        200:
+          description: List work progress of by tower id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getProgressHistoryByTower/{projectBuilding}:
+    get:
+      tags:
+        - Work Progress
+      description: List all work progress by tower id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: projectBuilding
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: startDate
+          schema:
+            type: string
+          required: false
+          example: "2023-02-10"
+        - in: query
+          name: endDate
+          schema:
+            type: string
+          required: false
+          example: "2023-02-10"
+      responses:
+        200:
+          description: List all progress history by tower id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAccountListByProject/{project}:
+    get:
+      tags:
+        - Construction Finance
+      description: List all accounts of the companies for the project. Use this in NOC creation
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List all accounts of the companies for the project.Use this in NOC creation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getAccountDetailsById/{id}:
+    get:
+      tags:
+        - Construction Finance
+      description: View account details of the company
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: View account details of the company
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getInventoryDetails/{project}:
+    get:
+      tags:
+        - Project Inventory
+      description: View inventory details of the project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: View inventory details of the project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getInventoryHistory/{project}:
+    get:
+      tags:
+        - Project Inventory
+      description: View inventory history of the project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: View inventory history of the project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateBuilderDetails:
+    post:
+      tags:
+        - SalesForce
+      description: API to update builder status by id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateBuilderStatus"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateBuilderDuplicate:
+    post:
+      tags:
+        - SalesForce
+      description: API to mark a builder as duplicate
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateBuilderDuplicate"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateProjectStatus:
+    post:
+      tags:
+        - SalesForce
+      description: API to update the status of the project by project ID
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateProjectStatus"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /createBuilder:
+    post:
+      tags:
+        - SalesForce
+      description: create and update company Info for profile
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createBuilder"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /updateWorkProgess:
+    post:
+      tags:
+        - Work Progress
+      description: Update Work Progress details
+      parameters:
+        - in: header
+          name: x-access-token
+          required: false
+          schema:
+            type: string
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateWorkProgess"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /getUnitListByProject/{project}/{tower}:
+    get:
+      tags:
+        - Construction Finance
+      description: View account details of the company
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: tower
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: View account details of the company
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /updateInventory/{project}:
+    post:
+      tags:
+        - Project Inventory
+      description: Update inventory for the project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/inventoryUpdation"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Update inventory for the project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /addPurchaser/{company}/{project}:
+    post:
+      tags:
+        - Project Purchaser
+      description: Add purchaser for the project
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: integer
+        - in: path
+          name: project
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/addPurchaser"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Update inventory for the project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /createUpdateProjectBuilder:
+    post:
+      tags:
+        - Project Builder
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      description: user login
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUpdateProjectBuilder"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /getProjectBuilderByProjectId:
+    get:
+      tags:
+        - Get Company Details
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: projectId
+          description: Id of specific project
+          schema:
+            type: integer
+          required: true
+        - in: query
+          name: projectBuilderIds
+          description: Comma-separated list of IDs
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+          required: false
+      responses:
+        200:
+          description: Return the list of companies with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompanyDetails"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /migrateBuilders:
+    get:
+      tags:
+        - Data Migration
+      description: Migrate all builders
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: List work progress of by tower id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /nocFileUploadData:
+    post:
+      tags:
+        - add purchaser-Bulk
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      summary: Upload a file
+      operationId: uploadFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+                  format: byte
+                  example: "base64 string"
+                project_id:
+                  type: integer
+                  example: 1
+                filename:
+                  type: string
+                  example: "test.xlsx"    
+                  
+      responses:
+        "200":
+          description: Uploaded successfully
+        "400":
+          description: Invalid file
+
+  /getProgressHistoryByTowerId/{projectBuilding}:
+    get:
+      tags:
+        - Work Progress
+      description: List all work progress by tower id
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: projectBuilding
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: startDate
+          schema:
+            type: string
+          required: false
+          example: "2023-02-10"
+        - in: query
+          name: endDate
+          schema:
+            type: string
+          required: false
+          example: "2023-02-10"
+        - in: query
+          name: sortOrderType
+          description: "Sort Order Type"
+          required: false
+          schema:
+            type: string
+            enum: ["LastMonth", "Last3month", Last6month, LastYear]
+            description: "Select sort value from list"
+      responses:
+        200:
+          description: List all progress history by tower id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /createAccountforBulkCreation:
+    post:
+      tags:
+        - add purchaser-Bulk
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      description: create Account for Bulk Creation
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createAccountforBulkCreation"
+        required: true
+      responses:
+        201:
+          description: Return the example with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /addQueryCommunicationDetails:
+    post:
+      tags:
+        - Query Communication File
+      description: Query communication creation
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: queryId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/addQueryCommunicationDetails"
+              type: object
+        required: true
+      responses:
+        201:
+          description: Return query communication with the specified id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /addCompaniesToSFS:
+    post:
+      tags:
+        - Data Migration
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: The search type to match with type of designations.
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Return the list of designations with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /sendEmailNotificationToNewUser:
+    post:
+      tags:
+        - Send email to new user
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: x-access-token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: an example
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/sendEmailNotificationToNewUser"
+              type: object
+        required: true
+      responses:
+        200:
+          description: Return the list of designations with id and name
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Example"
+        4XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        5XX:
+          description: Example not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"             
+components:
+  schemas:
+    Example:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        name:
+          type: string
+          example: example 3
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+    ExampleBody:
+      title: example
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: token
+    refreshToken:
+      title: Generate Refersh Token
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          example: ""
+    createUser:
+      title: Create User Details
+      type: object
+      properties:
+        username:
+          type: string
+          example: "hdfc"
+        email:
+          type: string
+          example: "hdfc@hdfc.com"
+        mobile:
+          type: integer
+          example: 9887978786
+        password:
+          type: string
+          example: 123456
+    UserDetails:
+      title: User Details
+    userRegistration:
+      title: Create User Details
+      type: object
+      properties:
+        userName:
+          type: string
+          example: "hdfc"
+        userEmail:
+          type: string
+          example: "hdfc@hdfc.com"
+        userMobile:
+          type: string
+          example: "1234567899"
+        password:
+          type: string
+          example: "password"
+        companyName:
+          type: string
+          nullable: true
+          example: "name"
+        designationId:
+          type: integer
+          example: 1
+    userCreation:
+      title: Create User Details
+      type: object
+      properties:
+        userName:
+          type: string
+          example: "Tony Sharma"
+        userEmail:
+          type: string
+          example: "tony@hdfc.com"
+        userMobile:
+          type: string
+          example: "1234567899"
+        designationId:
+          type: integer
+          example: 1
+        cityId:
+          type: integer
+          example: 1
+        roleId:
+          type: integer
+          example: 2
+
+    userUpdation:
+      title: Create User Details
+      type: object
+      properties:
+        userName:
+          type: string
+          example: "Tony Sharma"
+        userEmail:
+          type: string
+          example: "tony@hdfc.com"
+        userMobile:
+          type: string
+          example: "1234567899"
+        designationId:
+          type: integer
+          example: 1
+        cityId:
+          type: integer
+          example: 1
+        roleId:
+          type: integer
+          example: 2
+        status:
+          type: string
+          example: "active/inactive"
+        companies:
+          type: array
+          example:
+            - 1
+            - 2
+        projects:
+          type: array
+          example:
+            - 1
+            - 2
+
+    userCompanyUpdation:
+      title: Update User company Details
+      type: object
+      properties:
+        companyId:
+          type: integer
+          example: 1
+        projects:
+          type: array
+          example:
+            - 1
+            - 2
+    regOtpVerifications:
+      title: registration Otp Verifications
+      type: object
+      properties:
+        otp:
+          type: string
+          example: "11111"
+        type:
+          type: string
+          example: "smsOtp/emailOtp"
+    resendRegOtp:
+      title: resend Otp
+      type: object
+      properties:
+        type:
+          type: string
+          example: "smsOtp/emailOtp"
+    resendLoginOtp:
+      title: resend Login Otp
+      type: object
+    loginOtpVerifications:
+      title: login Otp Verifications
+      type: object
+      properties:
+        otp:
+          type: string
+          example: "11111"
+    userLogin:
+      title: user login
+      type: object
+      properties:
+        userCredential:
+          type: string
+          example: "test@email.com/999999999"
+        password:
+          type: string
+          example: "1234567899"
+    forgotPassword:
+      title: forgot password
+      type: object
+      properties:
+        userEmail:
+          type: string
+          example: "test@email.com"
+    resetPassword:
+      title: reset password
+      type: object
+      properties:
+        password:
+          type: string
+          example: "password"
+        token:
+          type: string
+          example: "1234567"
+    userUpdate:
+      title: user details updation
+      type: object
+      properties:
+        email:
+          type: string
+          example: "test@email.com"
+        mobile:
+          type: string
+          example: "1234567899"
+    CompanyDetails:
+      title: company details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Company 123"
+    DesignationDetails:
+      title: designation details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Manager"
+    EntityDetails:
+      title: Entity details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"
+    StateDetails:
+      title: State details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"
+    DistrictDetails:
+      title: Disctrict details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"
+    CityDetails:
+      title: City details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"
+    PincodeDetails:
+      title: Pincode details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"
+    BankAccountTypeDetails:
+      title: Bank account type details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"
+    BankDetails:
+      title: Bank account type details
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Public"            
+    reraOperations:
+      title: rera deatils Operations
+      type: object
+      properties:
+        rera_applicable:
+          type: boolean
+          example: true
+        user_id:
+          type: integer
+          example: 1
+        company_id:
+          type: integer
+          example: 1
+        reraDetails:
+          type: array
+          example:
+            - registration_status: "pending"
+              registration_number: "ytyutyut8878768"
+              autofill_enabled: true
+              application_number: "55555"
+            - registration_status: "pending"
+              registration_number: "ytyutyut8878768"
+              autofill_enabled: true
+              application_number: "55555"
+    projectInfo:
+      title: project info operations
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        tab:
+          type: string
+          example: "projecInfo/constructionFin"
+        rera_applicable:
+          type: boolean
+          example: true
+        name:
+          type: string
+          example: "projectname"
+        total_towers:
+          type: string
+          example: "1"
+        application_number:
+          type: string
+          example: "2"
+        total_units:
+          type: string
+          example: "4"
+        contact_person_name:
+          type: string
+          example: "john"
+        contact_person_designation:
+          type: string
+          example: "man"
+        contact_person_mobile:
+          type: string
+          example: "9847952001"
+        contact_person_email:
+          type: string
+          example: "test@gmail.com"
+        cover_image:
+          type: string
+          example: "url"
+        cover_image_name:
+          type: string
+          example: "name"
+        project_mortaged:
+          type: boolean
+          example: true
+        mortaged_institution:
+          type: string
+          example: "mortaged_institution"
+        cf_loan_number:
+          type: string
+          nullable: true
+          example: "trc/111"
+        status:
+          type: string
+          example: "completed"
+        completed_step:
+          type: integer
+          example: 1
+        submitted_date:
+          type: string
+          example: "2022-12-11"
+        projectCategories:
+          type: array
+          example:
+            - total_units: "11"
+              sold_units: "100"
+              rate_per_square_feet: "100"
+              unsold_units: "100"
+              building_category_id: "1"
+            - total_units: "11"
+              sold_units: "100"
+              rate_per_square_feet: "100"
+              unsold_units: "100"
+              building_category_id: "2"
+    companyInfo:
+      title: company info operations
+      type: object
+      properties:
+        entity_id:
+          type: integer
+          example: 1
+        pan_number:
+          type: string
+          example: "3h23hhj23j"
+        cin_number:
+          type: string
+          nullable: true
+          example: "43453533434343"
+        address_line_1:
+          type: string
+          example: "2nd Floor, Round 345"
+        address_line_2:
+          type: string
+          example: "Chennai"
+        address_line_3:
+          type: string
+          example: "Tamilnadu, India"
+        pincode_id:
+          type: integer
+          example: 1
+        city_id:
+          type: integer
+          example: 1
+        state_id:
+          type: integer
+          example: 1
+        district_id:
+          type: integer
+          example: 1
+        group_company_name:
+          type: string
+          example: "Asset Group of companies"
+        completed_project_count:
+          type: integer
+          example: 20
+        completed_project_names:
+          type: string
+          example: "Dream Homes, Forest View"
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              file_name:
+                type: string
+                example: "Pancard 1"
+              file_url:
+                type: string
+                example: "www.awss3.com/ewe/ewewew/"
+              document_type:
+                type: string
+                example: "panCard"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+    companyInfoUpdate:
+      title: company info operations
+      type: object
+      properties:
+        company:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Company 12345"
+        entity_id:
+          type: integer
+          example: 1
+        pan_number:
+          type: string
+          example: "3h23hhj23j"
+        cin_number:
+          type: string
+          nullable: true
+          example: "43453533434343"
+        address_line_1:
+          type: string
+          example: "2nd Floor, Round 345"
+        address_line_2:
+          type: string
+          example: "Chennai"
+        address_line_3:
+          type: string
+          example: "Tamilnadu, India"
+        pincode_id:
+          type: integer
+          example: 1
+        city_id:
+          type: integer
+          example: 1
+        state_id:
+          type: integer
+          example: 1
+        district_id:
+          type: integer
+          example: 1
+        group_company_name:
+          type: string
+          example: "Asset Group of companies"
+        completed_project_count:
+          type: integer
+          example: 20
+        completed_project_names:
+          type: string
+          example: "Dream Homes, Forest View"
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              file_name:
+                type: string
+                example: "Pancard 1"
+              file_url:
+                type: string
+                example: "www.awss3.com/ewe/ewewew/"
+              document_type:
+                type: string
+                example: "panCard"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+    companyMemberDetails:
+      title: company info operations
+      type: object
+      properties:
+        company:
+          type: integer
+          example: 1
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              file_name:
+                type: string
+                example: "Pancard 1"
+              file_url:
+                type: string
+                example: "www.awss3.com/ewe/ewewew/"
+              document_type:
+                type: string
+                example: "panCard"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+    companyProjectInfoUpdate:
+      title: company and project info operations
+      type: object
+      properties:
+        company:
+          type: integer
+          example: 1
+        project:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Company 12345"
+        entity_id:
+          type: integer
+          example: 1
+        pan_number:
+          type: string
+          example: "3h23hhj23j"
+        cin_number:
+          type: string
+          nullable: true
+          example: "43453533434343"
+        address_line_1:
+          type: string
+          example: "2nd Floor, Round 345"
+        address_line_2:
+          type: string
+          example: "Chennai"
+        address_line_3:
+          type: string
+          example: "Tamilnadu, India"
+        pincode_id:
+          type: integer
+          example: 1
+        city_id:
+          type: integer
+          example: 1
+        state_id:
+          type: integer
+          example: 1
+        district_id:
+          type: integer
+          example: 1
+        group_company_name:
+          type: string
+          example: "Asset Group of companies"
+        completed_project_count:
+          type: integer
+          example: 20
+        completed_project_names:
+          type: string
+          example: "Dream Homes, Forest View"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+    GetProjectCategory:
+      title: Project category details
+      type: object
+    GetAllDocument:
+      title: All document category
+      type: object
+    GetAllProjects:
+      title: Get All project details
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 1
+    SaveandUpdateAddressinfo:
+      title: Save project address details
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 2
+        sale_deed_no:
+          type: string
+          example: "ee123"
+        address_line_1:
+          type: string
+          example: "address_line_1"
+        address_line_2:
+          type: string
+          example: "address_line_2"
+        address_line_3:
+          type: string
+          example: "address_line_3"
+        landmark:
+          type: string
+          nullable: true
+          example: "landmark"
+        pincode_id:
+          type: integer
+          example: 3
+        state_id:
+          type: integer
+          example: 4
+        city_id:
+          type: integer
+          example: 5
+        district_id:
+          type: integer
+          example: 6
+        area_id:
+          type: integer
+          example: 7
+        thaluk_id:
+          type: integer
+          example: 7
+    DocumentSingleOperations:
+      title: Save project address details
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 2
+        document_url:
+          type: string
+          example: "https://sample.doc"
+        document_name:
+          type: string
+          example: "address_line_1"
+        remarks:
+          type: string
+          example: "remarks"
+        document_type_id:
+          type: integer
+          example: 2
+    DocumentBulkOperations:
+      title: Save project address details
+      type: array
+      example:
+        - project_id: 1
+          document_url: "https://sample.doc"
+          document_name: "address_line_1"
+          remarks: "remarks"
+          document_type_id: 2
+    CityDetailsbyState:
+      title: City details
+      type: object
+    AreaDetailsbyState:
+      title: Area details
+      type: object
+    TalukaDetailsbyState:
+      title: Taluka details
+      type: object
+    GetCompanyInfoByProject:
+      title: Get All Company details by Project id
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 1
+    DeteleDocumentByid:
+      title: Delete document by id
+      type: object
+      properties:
+        document_id:
+          type: integer
+          example: 1
+    DeteleDocumentByDocType:
+      title: Delete document by doc type id
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 1
+        document_type_id:
+          type: integer
+          example: 1
+    SubmitProject:
+      title: Submit project
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 1
+        submitted_date:
+          type: string
+          example: "2022-12-11"
+    memberInfoUpdate:
+      title: memberInfo
+      type: object
+      properties:
+        company:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Company 12345"
+        entity_id:
+          type: integer
+          example: 1
+        pan_number:
+          type: string
+          example: "3h23hhj23j"
+        cin_number:
+          type: string
+          nullable: true
+          example: "43453533434343"
+        address_line_1:
+          type: string
+          example: "2nd Floor, Round 345"
+        address_line_2:
+          type: string
+          example: "Chennai"
+        address_line_3:
+          type: string
+          example: "Tamilnadu, India"
+        pincode_id:
+          type: integer
+          example: 1
+        city_id:
+          type: integer
+          example: 1
+        state_id:
+          type: integer
+          example: 1
+        district_id:
+          type: integer
+          example: 1
+        group_company_name:
+          type: string
+          example: "Asset Group of companies"
+        completed_project_count:
+          type: integer
+          example: 20
+        completed_project_names:
+          type: string
+          example: "Dream Homes, Forest View"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+    queryCommunication:
+      title: Submit query communication
+      type: object
+      properties:
+        message:
+          type: string
+          example: Hi
+        documentName:
+          type: string
+          example: "project_information.pdf"
+        documentUrl:
+          type: string
+          example: "aws/s3/dfdfd"
+    submitNewDate:
+      title: Submit new date for query document
+      type: object
+      properties:
+        last_submission_date:
+          type: string
+          example: "2022-11-10"     
+    updateBuilderStatus:
+      title: api to update builder status by id
+      type: object
+      properties:
+        builderId:
+          type: integer
+          example: 1
+        status:
+          type: string
+          example: ""
+        reason:
+          type: string
+          example: ""
+        builder_number:
+          type: string
+          example: ""
+    updateBuilderDuplicate:
+      title: api to mark a builder as duplicate
+      type: object
+      properties:
+        builderId:
+          type: integer
+          example: 1
+        reason:
+          type: string
+          example: ""
+    updateProjectStatus:
+      title: API to update the status of the project by project ID
+      type: object
+      properties:
+        project_id:
+          type: integer
+          example: 1
+        status:
+          type: string
+          example: ""
+    createBuilder:
+      title: company info operations
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Company 12345"
+        entity_id:
+          type: integer
+          example: 1
+        pan_number:
+          type: string
+          example: "3h23hhj23j"
+        cin_number:
+          type: string
+          nullable: true
+          example: "43453533434343"
+        address_line_1:
+          type: string
+          example: "2nd Floor, Round 345"
+        address_line_2:
+          type: string
+          example: "Chennai"
+        address_line_3:
+          type: string
+          example: "Tamilnadu, India"
+        pincode_id:
+          type: integer
+          example: 1
+        city_id:
+          type: integer
+          example: 1
+        state_id:
+          type: integer
+          example: 1
+        district_id:
+          type: integer
+          example: 1
+        group_company_name:
+          type: string
+          example: "Asset Group of companies"
+        completed_project_count:
+          type: integer
+          example: 20
+        completed_project_names:
+          type: string
+          example: "Dream Homes, Forest View"
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              file_name:
+                type: string
+                example: "Pancard 1"
+              file_url:
+                type: string
+                example: "www.awss3.com/ewe/ewewew/"
+              document_type:
+                type: string
+                example: "panCard"
+        key_members:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+              director_pancard_document_number:
+                type: string
+                example: "AHBDTSD344"
+              director_pancard_document_url:
+                type: string
+                example: "s3.amazon.com/rere/rerererer/erere"
+              director_pancard_document_name:
+                type: string
+                example: "pancard.jpg"
+        contact_persons:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "Joseph Orton"
+              designation_id:
+                type: integer
+                example: 1
+              mobile:
+                type: string
+                example: "8087767889"
+              email:
+                type: string
+                example: "joseph@trtt.com"
+    inventoryUpdation:
+      title: Submit query communication
+      type: object
+      properties:
+        total_units:
+          type: string
+          example: "123"
+        units_for_sales:
+          type: string
+          example: "121"
+        sold_units:
+          type: string
+          example: "112"
+        avg_rate_per_square_feet:
+          type: string
+          example: "1233"
+        total_unsold_inventory:
+          type: string
+          example: "12"
+        total_value_of_unsold_inventory:
+          type: string
+          example: "123233"
+    addPurchaser:
+      title: Submit project purchaser
+      type: object
+      properties:
+        total_units:
+          type: string
+          example: "123"
+        units_for_sales:
+          type: string
+          example: "121"
+        sold_units:
+          type: string
+          example: "112"
+        avg_rate_per_square_feet:
+          type: string
+          example: "1233"
+        total_unsold_inventory:
+          type: string
+          example: "12"
+        total_value_of_unsold_inventory:
+          type: string
+          example: "123233"
+        builder_account_id:
+          type: integer
+          example: 1
+        payee_name:
+          type: string
+          example: "John Brittas"
+        account_number:
+          type: string
+          example: "343434353535"
+        account_type:
+          type: string
+          example: "Fixed"
+        bank:
+          type: string
+          example: "HDFC"
+        ifsc_code:
+          type: string
+          example: "HD12344"
+        file_name:
+          type: string
+          example: "cancelled_cheque.pfd"
+        file_url:
+          type: string
+          example: "amazonaws.com/s3/doc"
+        purchaser:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              file_number:
+                type: string
+              mobile_number:
+                type: string
+              email:
+                type: string
+              lead_shared_with_hdfc:
+                type: boolean
+              unit_type:
+                type: string
+                example: "Tower, Bungalow"
+              unit_type_name:
+                type: string
+              unit_number:
+                type: string
+              booking_date:
+                type: string
+              carpet_area:
+                type: string
+              rate_per_sqfeet:
+                type: string
+              agreement_value:
+                type: string
+              sanctioned_loan_amount:
+                type: string
+              balance_recievable:
+                type: string
+              co_purchaser:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    co_purchaser_name:
+                      type: string
+                    co_purchaser_email:
+                      type: string
+                    co_purchaser_mobile_number:
+                      type: string
+    updateWorkProgess:
+      title: Save project address details
+      type: object
+      properties:
+        BuildingProgressDetail:
+          type: array
+          items:
+            type: object
+            properties:
+              tower_commencement_date:
+                type: string
+                example: "2022-11-10"
+              estimated_completion_date:
+                type: string
+                example: "2022-11-10"
+              construction_completion_percentage:
+                type: string
+                example: "0"
+              stage_of_construction:
+                type: string
+                example: "0"
+              submited_on:
+                type: string
+                example: "2022-11-10"
+              project_building_id:
+                type: integer
+                example: 1
+        BuildingProgressDocumentData:
+          type: array
+          items:
+            type: object
+            properties:
+              file_name:
+                type: string
+                example: "file_name"
+              file_url:
+                type: string
+                example: "file_url"
+              project_building_id:
+                type: integer
+                example: 1
+    createUpdateProjectBuilder:
+      title: Create Update Project Builder
+      type: object
+      properties:
+        project_builder_id:
+          type: integer
+          example: 1
+        building_name:
+          type: string
+          example: "name"
+        building_number:
+          type: string
+          example: "112"
+        building_type:
+          type: string
+          example: "bungalow/tower"
+        total_floor:
+          type: string
+          example: "1233"
+        funding_source:
+          type: string
+          example: "12"
+        issues_sales_deed:
+          type: string
+          example: "Yes"
+        estimated_date:
+          type: string
+          example: "2022-11-11"
+        total_units:
+          type: string
+          example: "12"
+    createAccountforBulkCreation:
+      title: Create Account for Bulk Purcahse Creation
+      type: object
+      properties:
+        accountId:
+          type: integer
+          example: 1
+        payee_name:
+          type: string
+          example: "name"
+        account_number:
+          type: string
+          example: "112"
+        account_type:
+          type: string
+          example: ""
+        bank:
+          type: string
+          example: "1233"
+        ifsc_code:
+          type: string
+          example: "12"
+        file_name:
+          type: string
+          example: "file_name"
+        file_url:
+          type: string
+          example: "file_url"
+        purchaseIdArray:
+          type: array
+          items:
+            type: integer 
+    addQueryCommunicationDetails:
+      title: Submit query communication
+      type: object
+      properties:
+        message:
+          type: string
+          example: Hi
+        queryCommunicationFiles:
+          type: array
+          items:
+            type: object
+            properties:
+              document_name:
+                type: string
+                example: "project_information.pdf"
+              document_url:
+                type: string
+                example: "aws/s3/dfdfd"
+              query_communication_id:
+                type: integer
+                example: 1
+    sendEmailNotificationToNewUser:
+      title: Send email to new user
+      type: object
+      properties:
+        userOtpToken:
+          type: string
+          example: "hasgd73678"
+        userEmail:
+          type: string
+          example: "testOtp@gmail.com"

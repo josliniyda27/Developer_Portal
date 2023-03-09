@@ -1,3 +1,0 @@
-{"level":50,"time":1677827717263,"pid":84292,"hostname":"ip-10-122-10-197","msg":"Failed to sync db: foreign key constraint \"project_purchasers_builder_account_id_fkey\" cannot be implemented"}
-{"level":50,"time":1677828204969,"pid":84457,"hostname":"ip-10-122-10-197","msg":"Failed to sync db: foreign key constraint \"project_purchasers_builder_account_id_fkey\" cannot be implemented"}
-{"level":50,"time":1677828372791,"pid":84554,"hostname":"ip-10-122-10-197","msg":"Failed to sync db: foreign key constraint \"project_purchasers_builder_account_id_fkey\" cannot be implemented"}

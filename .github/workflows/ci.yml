@@ -1,0 +1,41 @@
+name: Continuous integration
+
+on:
+  pull_request:
+    types: opened
+    branches: 
+      - development
+      - uat
+      - release
+      - main
+
+jobs:
+  CI_development:
+    if: ${{ github.base_ref == 'development' }}
+    runs-on: ubuntu-latest
+    env:
+      version_dev: $(node --eval="process.stdout.write(require('./package.json').version)")
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+#         with:
+#           path: 'D:\Devp\cldgit\actions-runner\_work\Angular_welcome_page\Angular_welcome_page'
+#           ref: ${{ github.head_ref }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Build and Package the alpha version
+        run: |
+            npm ci
+            npm run build --if-present
+

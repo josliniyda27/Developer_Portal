@@ -1,0 +1,17 @@
+node_modules
+extra_documents
+server/common/info_error.log
+dist
+build
+readableFileUpload
+.env
+.env.dev
+.env.prod
+.DS_Store
+
+*.log
+*.local
+/node-app-debug.log
+/node-app-info.log
+/node-app-error.log
+test_documents

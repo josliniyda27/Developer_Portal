@@ -24,10 +24,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-#         with:
-#           path: 'D:\Devp\cldgit\actions-runner\_work\Angular_welcome_page\Angular_welcome_page'
-#           ref: ${{ github.head_ref }}
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -38,4 +34,15 @@ jobs:
         run: |
             npm ci
             npm run build --if-present
+      - name: Versioning
+        run: |
+          npm version minor
+          git push origin ${{ github.head_ref }}
+      - name: Package and publish the alpha version
+        env:
+          GH_ENTERPRISE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_HOST: "github.com"
+        run: |
+          Compress-Archive -Path ".\dist\devops" -DestinationPath ".\dist\AWP_alpha_v${{ env.version_dev }}.zip"
+          gh release create "AWP_alpha_v${{ env.version_dev }}" -t "AWP_alpha_v${{ env.version_dev }}" ".\dist\AWP_alpha_v${{ env.version_dev }}.zip"
 
